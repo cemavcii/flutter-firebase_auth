@@ -16,22 +16,25 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Firebase Auth Home Screen')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButtonWidged(
-              buttonText: 'Login with email password',
-              onPressed: () {
-                NavigatorUtils()
-                    .pushNext(context, const SigninWithEmailPasswordView());
-              }),
-          ElevatedButtonWidged(
-              buttonText: 'Register with email password',
-              onPressed: () {
-                NavigatorUtils()
-                    .pushNext(context, const SignUpWithEmailPassword());
-              }),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButtonWidged(
+                buttonText: 'Login with email password',
+                onPressed: () {
+                  NavigatorUtils()
+                      .pushNext(context, const SigninWithEmailPasswordView());
+                }),
+            ElevatedButtonWidged(
+                buttonText: 'Register with email password',
+                onPressed: () {
+                  NavigatorUtils()
+                      .pushNext(context, const SignUpWithEmailPassword());
+                }),
+          ],
+        ),
       ),
     );
   }

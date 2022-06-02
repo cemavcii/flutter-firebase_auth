@@ -45,6 +45,7 @@ class _SignUpWithEmailPasswordState extends State<SignUpWithEmailPassword> {
             height: 20,
           ),
           TextFormFieldWidget(
+              isPassword: true,
               prefixIcon: const Icon(Icons.password_outlined),
               hintText: 'Password',
               controller: _passwordController),

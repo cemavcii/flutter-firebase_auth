@@ -49,6 +49,7 @@ class _SigninWithEmailPasswordViewState
               height: 20,
             ),
             TextFormFieldWidget(
+                isPassword: true,
                 controller: _passwordController,
                 prefixIcon: const Icon(Icons.password_outlined),
                 hintText: 'Password'),
