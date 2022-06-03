@@ -1,3 +1,4 @@
+import 'package:firebase_auth_testt/pages/phone_signin_view.dart';
 import 'package:firebase_auth_testt/pages/signin_email_password_view.dart';
 import 'package:firebase_auth_testt/pages/signup_email_password.dart';
 import 'package:firebase_auth_testt/utils/navigator.dart';
@@ -32,6 +33,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                 onPressed: () {
                   NavigatorUtils()
                       .pushNext(context, const SignUpWithEmailPassword());
+                }),
+            ElevatedButtonWidged(
+                buttonText: 'Register with phone number',
+                onPressed: () {
+                  NavigatorUtils().pushNext(context, const PhoneSigninView());
                 }),
           ],
         ),
