@@ -11,7 +11,7 @@ class FirebaseAuthManager {
   final FirebaseAuth _auth;
   FirebaseAuthManager(this._auth);
 
-// Login
+// Login with email and password
   Future<void> signinWithEmailPassword(
       {required String email,
       required String password,
@@ -26,7 +26,7 @@ class FirebaseAuthManager {
     }
   }
 
-//Register
+//Register with email and password
   Future<void> signupWithEmailPassword(
       {required String email,
       required String password,
@@ -52,7 +52,7 @@ class FirebaseAuthManager {
     }
   }
 
-  //Register with phone number. only works on ios and androids
+  //Login with phone number. only works on ios and androids
   Future<void> signinWithPhoneNumber(
       BuildContext context, String phoneNumber) async {
     TextEditingController tokenController = TextEditingController();
@@ -83,6 +83,7 @@ class FirebaseAuthManager {
         codeAutoRetrievalTimeout: (String verificationId) {});
   }
 
+// Register with google account
   Future<void> signinWithGoogle(BuildContext context) async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -101,6 +102,15 @@ class FirebaseAuthManager {
       }
     } on FirebaseAuthException catch (e) {
       showSnackbar(context, e.message);
+    }
+  }
+
+// login anonymously
+  Future<void> signInAnonymously(BuildContext context) async {
+    try {
+      await _auth.signInAnonymously();
+    } on FirebaseAuthException catch (e) {
+      showSnackbar(context, e.message!);
     }
   }
 }

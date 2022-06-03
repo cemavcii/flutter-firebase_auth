@@ -37,15 +37,21 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       .pushNext(context, const SignUpWithEmailPassword());
                 }),
             ElevatedButtonWidged(
-                buttonText: 'Register with phone number',
+                buttonText: 'Login with phone number',
                 onPressed: () {
                   NavigatorUtils().pushNext(context, const PhoneSigninView());
                 }),
             ElevatedButtonWidged(
-                buttonText: 'Register with Google account',
+                buttonText: 'Login with Google account',
                 onPressed: () {
                   FirebaseAuthManager(FirebaseAuth.instance)
                       .signinWithGoogle(context);
+                }),
+            ElevatedButtonWidged(
+                buttonText: 'Login anonymously',
+                onPressed: () {
+                  FirebaseAuthManager(FirebaseAuth.instance)
+                      .signInAnonymously(context);
                 }),
           ],
         ),

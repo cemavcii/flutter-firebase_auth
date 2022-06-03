@@ -24,13 +24,13 @@ class _PhoneSigninViewState extends State<PhoneSigninView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Register with your phone number"),
+        title: const Text("Login with your phone number"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
-            "Register",
+            "Login",
             style: Theme.of(context).textTheme.headline5,
           ),
           const SizedBox(
@@ -45,7 +45,7 @@ class _PhoneSigninViewState extends State<PhoneSigninView> {
           ),
           ElevatedButtonWidged(
             onPressed: signinWithPhone,
-            buttonText: "Register now",
+            buttonText: "Login now",
           )
         ]),
       ),
