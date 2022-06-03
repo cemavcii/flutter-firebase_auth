@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../utils/show_custom_dialog.dart';
 import '../utils/show_snackbar.dart';
@@ -51,6 +52,7 @@ class FirebaseAuthManager {
     }
   }
 
+  //Register with phone number. only works on ios and androids
   Future<void> signinWithPhoneNumber(
       BuildContext context, String phoneNumber) async {
     TextEditingController tokenController = TextEditingController();
@@ -73,10 +75,32 @@ class FirebaseAuthManager {
               );
 
               await _auth.signInWithCredential(credential);
-              Navigator.of(context).pop(); // Remove the dialog box
+              //removes dialog
+              Navigator.of(context).pop();
             },
           );
         }),
         codeAutoRetrievalTimeout: (String verificationId) {});
+  }
+
+  Future<void> signinWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
+        // Create a new credential
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken,
+          idToken: googleAuth?.idToken,
+        );
+
+        await _auth.signInWithCredential(credential);
+      }
+    } on FirebaseAuthException catch (e) {
+      showSnackbar(context, e.message);
+    }
   }
 }

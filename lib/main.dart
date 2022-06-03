@@ -17,7 +17,10 @@ class FirebaseAuthApp extends StatelessWidget {
     return MaterialApp(
       title: 'Firebase Auth Test',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorScheme: const ColorScheme.dark()),
+      theme: ThemeData(
+        colorScheme: const ColorScheme.dark(),
+        appBarTheme: const AppBarTheme(centerTitle: true),
+      ),
       home: const HomeScreenView(),
     );
   }
