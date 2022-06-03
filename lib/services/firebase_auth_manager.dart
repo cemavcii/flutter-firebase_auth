@@ -11,6 +11,13 @@ class FirebaseAuthManager {
   final FirebaseAuth _auth;
   FirebaseAuthManager(this._auth);
 
+// use this method only when the user is logged in
+  User get userData => _auth.currentUser!;
+
+// provides current state of the user
+  Stream<User?> get authStateChanges =>
+      FirebaseAuth.instance.authStateChanges();
+
 // Login with email and password
   Future<void> signinWithEmailPassword(
       {required String email,
@@ -109,6 +116,24 @@ class FirebaseAuthManager {
   Future<void> signInAnonymously(BuildContext context) async {
     try {
       await _auth.signInAnonymously();
+    } on FirebaseAuthException catch (e) {
+      showSnackbar(context, e.message!);
+    }
+  }
+
+  //logout
+  Future<void> logout(BuildContext context) async {
+    try {
+      await _auth.signOut();
+    } on FirebaseAuthException catch (e) {
+      showSnackbar(context, e.message!);
+    }
+  }
+
+  //delete account
+  Future<void> deleteAccount(BuildContext context) async {
+    try {
+      await _auth.currentUser!.delete();
     } on FirebaseAuthException catch (e) {
       showSnackbar(context, e.message!);
     }
