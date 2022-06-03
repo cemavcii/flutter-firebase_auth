@@ -4,54 +4,46 @@ import 'package:firebase_auth_testt/widgets/elevated_button_widget.dart';
 import 'package:firebase_auth_testt/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 
-class SignUpWithEmailPassword extends StatefulWidget {
+import '../utils/app_constants.dart';
+
+class SignUpWithEmailPassword extends StatelessWidget {
   const SignUpWithEmailPassword({Key? key}) : super(key: key);
 
   @override
-  State<SignUpWithEmailPassword> createState() =>
-      _SignUpWithEmailPasswordState();
-}
-
-class _SignUpWithEmailPasswordState extends State<SignUpWithEmailPassword> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  void signupWithEmailPassword() async {
-    await FirebaseAuthManager(FirebaseAuth.instance).signupWithEmailPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-        context: context);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    void signupWithEmailPassword() async {
+      await FirebaseAuthManager(FirebaseAuth.instance).signupWithEmailPassword(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context);
+    }
+
     return Scaffold(
       appBar: AppBar(title: const Text('Register with email password')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: AppConstants().defaultHorizontalPadding,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
             "Register",
             style: Theme.of(context).textTheme.headline5,
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          AppConstants().defaultVerticalSizedBox,
           TextFormFieldWidget(
+              inputType: TextInputType.emailAddress,
               prefixIcon: const Icon(Icons.email_outlined),
               hintText: 'Email',
-              controller: _emailController),
-          const SizedBox(
-            height: 20,
-          ),
+              controller: emailController),
+          AppConstants().defaultVerticalSizedBox,
           TextFormFieldWidget(
+              inputType: TextInputType.text,
               isPassword: true,
               prefixIcon: const Icon(Icons.password_outlined),
               hintText: 'Password',
-              controller: _passwordController),
-          const SizedBox(
-            height: 30,
-          ),
+              controller: passwordController),
+          AppConstants().mediumVerticalSizedBox,
           ElevatedButtonWidged(
               buttonText: 'Register Now', onPressed: signupWithEmailPassword)
         ]),

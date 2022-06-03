@@ -3,34 +3,28 @@ import 'package:firebase_auth_testt/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../services/firebase_auth_manager.dart';
+import '../utils/app_constants.dart';
 import '../widgets/elevated_button_widget.dart';
 
-class SigninWithEmailPasswordView extends StatefulWidget {
+class SigninWithEmailPasswordView extends StatelessWidget {
   const SigninWithEmailPasswordView({Key? key}) : super(key: key);
 
   @override
-  State<SigninWithEmailPasswordView> createState() =>
-      _SigninWithEmailPasswordViewState();
-}
-
-class _SigninWithEmailPasswordViewState
-    extends State<SigninWithEmailPasswordView> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  void signinWithEmailPassword() async {
-    await FirebaseAuthManager(FirebaseAuth.instance).signinWithEmailPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-        context: context);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    void signinWithEmailPassword() async {
+      await FirebaseAuthManager(FirebaseAuth.instance).signinWithEmailPassword(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context);
+    }
+
     return Scaffold(
       appBar: AppBar(title: const Text('Login with email password')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: AppConstants().defaultHorizontalPadding,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -38,24 +32,20 @@ class _SigninWithEmailPasswordViewState
               "Login",
               style: Theme.of(context).textTheme.headline5,
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            AppConstants().defaultVerticalSizedBox,
             TextFormFieldWidget(
-                controller: _emailController,
+                inputType: TextInputType.emailAddress,
+                controller: emailController,
                 prefixIcon: const Icon(Icons.email_outlined),
                 hintText: 'Email'),
-            const SizedBox(
-              height: 20,
-            ),
+            AppConstants().defaultVerticalSizedBox,
             TextFormFieldWidget(
+                inputType: TextInputType.text,
                 isPassword: true,
-                controller: _passwordController,
+                controller: passwordController,
                 prefixIcon: const Icon(Icons.password_outlined),
                 hintText: 'Password'),
-            const SizedBox(
-              height: 30,
-            ),
+            AppConstants().mediumVerticalSizedBox,
             ElevatedButtonWidged(
               onPressed: signinWithEmailPassword,
               buttonText: "Login Now",

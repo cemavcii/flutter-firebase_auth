@@ -2,25 +2,21 @@ import 'package:firebase_auth_testt/pages/phone_signin_view.dart';
 import 'package:firebase_auth_testt/pages/signin_email_password_view.dart';
 import 'package:firebase_auth_testt/pages/signup_email_password.dart';
 import 'package:firebase_auth_testt/services/firebase_auth_manager.dart';
+import 'package:firebase_auth_testt/utils/app_constants.dart';
 import 'package:firebase_auth_testt/utils/navigator.dart';
 import 'package:firebase_auth_testt/widgets/elevated_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreenView extends StatefulWidget {
+class HomeScreenView extends StatelessWidget {
   const HomeScreenView({Key? key}) : super(key: key);
 
-  @override
-  State<HomeScreenView> createState() => _HomeScreenViewState();
-}
-
-class _HomeScreenViewState extends State<HomeScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Firebase Auth Home Screen')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: AppConstants().defaultHorizontalPadding,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

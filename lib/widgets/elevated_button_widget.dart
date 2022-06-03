@@ -12,8 +12,11 @@ class ElevatedButtonWidged extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-            child:
-                ElevatedButton(onPressed: onPressed, child: Text(buttonText))),
+          child: ElevatedButton(
+            onPressed: onPressed,
+            child: Text(buttonText),
+          ),
+        ),
       ],
     );
   }

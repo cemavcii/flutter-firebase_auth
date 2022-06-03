@@ -4,6 +4,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final Icon prefixIcon;
   final String hintText;
   final TextEditingController controller;
+  final TextInputType inputType;
   final bool isPassword;
 
   const TextFormFieldWidget(
@@ -11,6 +12,7 @@ class TextFormFieldWidget extends StatelessWidget {
       required this.prefixIcon,
       required this.hintText,
       required this.controller,
+      required this.inputType,
       this.isPassword = false})
       : super(key: key);
 
@@ -18,6 +20,7 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: isPassword,
+      keyboardType: inputType,
       controller: controller,
       decoration: InputDecoration(
           prefixIcon: prefixIcon,

@@ -3,46 +3,39 @@ import 'package:firebase_auth_testt/services/firebase_auth_manager.dart';
 import 'package:firebase_auth_testt/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/app_constants.dart';
 import '../widgets/elevated_button_widget.dart';
 
-class PhoneSigninView extends StatefulWidget {
+class PhoneSigninView extends StatelessWidget {
   const PhoneSigninView({Key? key}) : super(key: key);
 
   @override
-  State<PhoneSigninView> createState() => _PhoneSigninViewState();
-}
-
-class _PhoneSigninViewState extends State<PhoneSigninView> {
-  final TextEditingController _phoneController = TextEditingController();
-
-  void signinWithPhone() {
-    FirebaseAuthManager(FirebaseAuth.instance)
-        .signinWithPhoneNumber(context, _phoneController.text);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final TextEditingController phoneController = TextEditingController();
+
+    void signinWithPhone() {
+      FirebaseAuthManager(FirebaseAuth.instance)
+          .signinWithPhoneNumber(context, phoneController.text);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login with your phone number"),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: AppConstants().defaultHorizontalPadding,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
             "Login",
             style: Theme.of(context).textTheme.headline5,
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          AppConstants().defaultVerticalSizedBox,
           TextFormFieldWidget(
+              inputType: TextInputType.phone,
               prefixIcon: const Icon(Icons.phone),
               hintText: 'Phone number',
-              controller: _phoneController),
-          const SizedBox(
-            height: 20,
-          ),
+              controller: phoneController),
+          AppConstants().defaultVerticalSizedBox,
           ElevatedButtonWidged(
             onPressed: signinWithPhone,
             buttonText: "Login now",
